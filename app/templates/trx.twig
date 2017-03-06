@@ -1,0 +1,57 @@
+{% extends 'layout.twig' %}
+
+{% set title = 'List Transaction'  %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+ <a href="/trx/form"><button type="button" class="btn btn-primary">Send Money</button></a>
+<h1>Send to</h1>
+<table class="table">
+    <thead>
+        <tr>
+           <th>to</th>
+           <th>description</th>
+           <th>amount</th>
+           <th>approved</th>
+         </tr>
+        </thead>
+        <tbody>
+          {% for transaction in send %}
+          <tr>
+            <td>{{ transaction.to }}</td>
+            <td>{{ transaction.description }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ (1 in transaction.approved) ? 'Yes' : 'No' }} </td>
+          </tr>
+          {% endfor %}
+       </tbody>
+</table>
+
+<h1>come from</h1>
+<table class="table">
+    <thead>
+        <tr>
+           <th>to</th>
+           <th>description</th>
+           <th>amount</th>
+           <th>approved</th>
+         </tr>
+        </thead>
+        <tbody>
+          {% for transaction in receive %}
+          <tr>
+            <td>{{ transaction.to }}</td>
+            <td>{{ transaction.description }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>   
+            {% if transaction.approved == 0 %}
+                <a href="/trx/approve/{{transaction.id}}">approve</a>
+            {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+       </tbody>
+</table>
+{% endblock %}

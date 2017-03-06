@@ -1,0 +1,32 @@
+{% extends 'layout.twig' %}
+
+{% set title = 'Send Money'  %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+
+<form action="/trx/send" method="post" autocomplete="off">
+    <div class="form-group">
+        <label for="identifier">To</label>
+        <input class="form-control" type="text" name="to">
+    </div>
+
+    <div class="form-group">
+        <label for="identifier">description</label>
+        <input class="form-control" type="text" name="description">
+    </div>
+
+    <div class="form-group">
+        <label for="identifier">amount</label>
+        <input class="form-control" type="text" name="amount">
+    </div>
+
+    <input type="hidden" name="csrf_name" value="{{ csrf.name }}">
+    <input type="hidden" name="csrf_value" value="{{ csrf.value }}">
+    <div class="form-group">
+         <button type="submit" class="btn btn-sm btn-success btn-addon">Send</button>
+    </div>
+</form>
+{% endblock %}
